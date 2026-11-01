@@ -6,9 +6,9 @@
 > **Navigation:** `Screen.SettingsDataImport`, then `Screen.SettingsCsvImport`.
 > **Related:** [Feature map](feature-map.md), [Settings and preferences](settings-and-preferences.md), [Body metrics](body-metrics.md), [Nutrition](nutrition.md), [Apple Health import](apple-health-import.md).
 
-CSV import brings body measurements, vitals, steps and nutrition from a plain CSV file into Health Connect. It is meant for exports that have no importer of their own, such as a smart scale's weight and body-composition history, a temperature log, a glucose export, a pedometer's step history, or a spreadsheet of meals copied from nutrition labels.
+CSV import brings body measurements, vitals, blood pressure, steps, nutrition and workouts from a plain CSV file into Health Connect. It is meant for exports that have no importer of their own, such as a smart scale's weight and body-composition history, a blood pressure monitor's log, a temperature log, a glucose export, a pedometer's step history, a spreadsheet of meals copied from nutrition labels, or a workout history rebuilt by hand from other apps' exports.
 
-There is one vendor preset, the drip cycle tracker's export, recognised by its header; see [drip Export](#drip-export). Every other file is read through the column mapping: the user says what each column means, which is why a file OpenVitals has never seen still imports.
+There are two presets, recognised by their header: the drip cycle tracker's export, see [drip Export](#drip-export), and OpenVitals' own workout export, see [OpenVitals Workout Export](#openvitals-workout-export). Every other file is read through the column mapping: the user says what each column means, which is why a file OpenVitals has never seen still imports.
 
 ## Import Flow
 
@@ -48,15 +48,53 @@ Activity:
 
 - Steps.
 
+Blood pressure, from a systolic and a diastolic column, with optional body position and cuff location columns. See [Blood Pressure](#blood-pressure) below.
+
 Nutrition: every nutrient Health Connect stores, listed under the same sections as the nutrition screen. See [Nutrition](#nutrition) below.
+
+Workouts, through the preset for the app's own workout export, one workout a row. See [OpenVitals Workout Export](#openvitals-workout-export) below.
 
 Most supported measurements are a single value at a single instant, because that is the shape the column mapping expresses: one row, one timestamp, one number per column. Steps is the one interval metric: each row spans from its date and time to the optional "End date and time" column. When there is no end - the column is unmapped, the cell is blank, or the row is truncated before it - the row counts as one minute. An end that cannot be read, or that is not after the start, rejects only that row's steps; the instant measurements beside it still import.
 
 ## What Is Not Supported
 
-- **Blood pressure is deliberately unsupported.** Systolic and diastolic have to become one Health Connect record, which needs a two-columns-to-one-record rule the mapping model does not have.
-- **Interval records beyond steps and nutrition are not supported.** Sleep and workouts need stages or sub-records as well as a start and an end, so they are out of scope for the current mapping model. Steps and nutrition are the exceptions, carried by the single optional "End date and time" column.
+- **Interval records beyond steps and nutrition are not mapped.** Sleep needs stages as well as a start and an end, so it is out of scope for the column mapping. Steps and nutrition are the exceptions, carried by the single optional "End date and time" column. Workouts come in through the [workout export preset](#openvitals-workout-export), not through the mapping.
 - **Meal type is not mapped.** An imported food has no breakfast, lunch, dinner or snack label.
+
+## OpenVitals Workout Export
+
+The activity detail screen exports a workout as a CSV with one header row and one data row: English snake_case headers, SI units, ISO-8601 times. Since 2.15.2 the CSV importer recognises that header and reads each row as a workout, so a file the app wrote imports back with the type it had, and a history rebuilt by hand from other apps' exports, with the same headers and as many rows as there were workouts, imports the same way. This is the route for someone who lost their old phone and has only CSVs left.
+
+The header is recognised when it has `activity_type`, `start_time`, and `end_time` or `duration_seconds`; case and order do not matter and extra columns are allowed. The mapping step is replaced by a summary of the columns that will be imported and the ones that will not, plus the date and time settings, because a hand-made file often carries local times with no offset. A time that carries its own offset or ends in `Z` wins, as elsewhere.
+
+What each column becomes:
+
+- **`activity_type`.** The export's own names (`running`, `biking_stationary`, `strength_training`, ...) first; otherwise the words the route importer understands, with `_` read as a space, so `Outdoor Run` and `functional_strength_training` land on the right type. A type that names nothing is stored as an "other" workout and counted under "Activity type not recognised", so the row is accounted for; a blank cell does the same. Correct the cell and import again to replace it.
+- **`start_time`.** Required; a row without a readable start is rejected.
+- **`end_time`, `duration_seconds`.** The end column when it holds something, else the start plus the duration. A row with neither is rejected, as is one whose end is not after its start or whose span is over seven days.
+- **`title`, `notes`.** Trimmed; a blank is left out.
+- **`distance_meters`, `elevation_gained_meters`, `steps`, `total_calories_kcal`, `active_calories_kcal`, `floors_climbed`, `wheelchair_pushes`.** Each becomes the record OpenVitals writes beside a session, over the session's span. A blank or a zero is a gap; a value that is not a number, is negative or is past what an activity can hold costs that total only. A distance or an elevation on a type that cannot carry one (a yoga session) is dropped with "Not kept for this activity type". Active calories above the total are dropped and the total kept, since Health Connect refuses the pair.
+- **`average_heart_rate_bpm`.** Health Connect has no average on a session, so the figure becomes a flat two-sample heart-rate series, one sample at the start and one a second before the end, both at the average. An average outside 1 to 255 is rejected.
+- **`max_heart_rate_bpm`, `average_speed_meters_per_second`, `average_power_watts`, `average_steps_cadence_spm`, `average_cycling_cadence_rpm`, `source`.** Not imported: a session has no field for them, and a series cannot honestly be invented from an average. The options and confirm steps name them.
+
+Imported workouts are OpenVitals' own: they appear in the activity list and detail screen, can be edited and deleted there, and are stored as recorded by an unknown device, like a route or FIT file picked by hand. An edit in the activity form keeps the floors, pushes and the heart-rate series it has no field for.
+
+A workout is identified by its start instant, deliberately not by its values: a re-import of the same file replaces every workout and reports them as having replaced an earlier import; a corrected distance, title or type replaces the earlier record. Two workouts starting at the same instant collapse into one, and a row deleted from the file leaves its workout in place until it is deleted in the app.
+
+The confirm step asks for the session write permission and, for each total column in the file, that total's write permission. Workouts are written through the same path as the route and FIT bulk import, in batches, with the same quota pauses. The result's "Workouts" tally counts sessions, one per row, not the totals and the series beside them.
+
+## Blood Pressure
+
+Since 2.15.2, a blood pressure reading is one Health Connect record made from several columns, so its columns are mapped under their own "Blood pressure" section of the column menu rather than as measurements:
+
+- **Systolic** and **Diastolic**, in mmHg. Both are needed: a mapping with only one of them, or with a body position or cuff location column but no pressures, cannot continue.
+- **Body position** and **Cuff location**, optional, written as words.
+
+A word is matched against the labels the app itself shows for the options, in the app's language and then in English, ignoring case, spacing and punctuation: "Sitting", "sitting", "SITTING" and, in Finnish, "Istuen" all read as sitting; "Left arm", "left_arm" and "LEFT ARM" as the left upper arm. The body positions are sitting, standing, lying down and reclining; the cuff locations are the left and right arm and the left and right wrist. A column mapped to one of them lists the words it accepts, and names any value in the sampled rows that matches none.
+
+A blood pressure section on the mapping step chooses a default body position and cuff location, both "Not specified" until set. A reading takes the default when the file has no such column, or when its cell is blank or holds a word that matches nothing, such as "seated" or a number. The position or location never costs the reading. The defaults are remembered for the next import.
+
+A row whose systolic and diastolic cells are both blank has no reading, which is not an error. A reading is rejected when only one of them is filled, when one is not a number, when either is outside what Health Connect accepts (systolic 20 to 200 mmHg, diastolic 10 to 180 mmHg), or when the systolic is not above the diastolic, which usually means the two columns are swapped. A rejected reading counts as one rejection, under its first fault in column order, and costs nothing else in the row: a weight in the same row still imports. A reading is identified by its instant, like any measurement, so re-importing replaces it.
 
 ## drip Export
 
@@ -124,12 +162,12 @@ Every column starts as not imported, so a column is only ever included on purpos
 
 The first column whose sampled values all parse as a date is pre-selected as the timestamp column. Measurements are never guessed from header text; the date guess is safe only because it is checked against the data.
 
-The step will not continue until the mapping is valid. It reports a missing or duplicated timestamp column, a duplicated end date and time column, a duplicated food-name column, no measurement or nutrient columns at all, two columns mapped to the same measurement or nutrient, a body-fat mass column with no weight column to derive from, and a date format that matches none of the sampled rows.
+The step will not continue until the mapping is valid. It reports a missing or duplicated timestamp column, a duplicated end date and time column, a duplicated food-name column, no measurement, nutrient or blood pressure columns at all, two columns mapped to the same measurement, nutrient or part of a blood pressure reading, a blood pressure column without both a systolic and a diastolic one, a body-fat mass column with no weight column to derive from, and a date format that matches none of the sampled rows.
 
 ## What Gets Rejected
 
-- A bad timestamp, or a row with fewer columns than the mapping needs, costs the whole row.
-- A bad value costs only that measurement or nutrient, so one unreadable body-fat cell does not throw away a good weight in the same row, and one unreadable sodium cell does not throw away the rest of the food.
+- A bad timestamp, or a row with fewer columns than the mapping needs, costs the whole row. The end date and time, food name, body position and cuff location columns are not counted, so a row that stops before an empty trailing cell of theirs still imports.
+- A bad value costs only that measurement, nutrient or blood pressure reading, so one unreadable body-fat cell does not throw away a good weight in the same row, and one unreadable sodium cell does not throw away the rest of the food.
 - A blank cell is a gap in the data, not an error. Scales routinely skip measurements.
 - Values outside a plausible human range are rejected rather than stored. This is the guard against a mis-mapped column.
 

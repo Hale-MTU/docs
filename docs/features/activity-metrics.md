@@ -48,6 +48,12 @@ The movement metrics share one metric screen configured per metric, which carrie
 
 Screen state lives in an activity `ViewModel` loading through `ActivityRepository`. Period selection is **not** owned by the view model — the shared metric-detail scaffold owns it and hands a selection down. New activity metric work should keep metric-specific charts and rows in `features/activity` and use the shared scaffold instead of adding a new screen shell.
 
+## One Workout, Two Writers
+
+Health Connect does not merge workouts. Two watches worn on one walk, or a watch and its vendor app, each file their own session, and the activity statistics would add both. OpenVitals folds such sessions into one before anything counts them: two sessions whose spans overlap by at least 85 percent and whose starts and ends lie within 15 minutes of each other are the same workout, and the one carrying more (a route, a distance, a heart rate, an OpenVitals entry over another app's) is kept. Since 2.15.2, two different apps may call the same outing different things, a walk on one wrist and a hike on the other, so between sources the exercise type is not compared. Within one source two overlapping sessions of different types are two deliberate records and are both kept.
+
+Steps and distance through the day are not touched by this: Health Connect itself keeps one app's data where several apps overlap, in the order its Data sources and priority setting lists them. That order ranks apps, not devices, so two devices syncing through the same app still add up there.
+
 ## Related Features
 
 - [`activity-recording.md`](activity-recording.md): GPS/repetition recording before saving to Health Connect.
