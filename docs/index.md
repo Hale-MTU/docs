@@ -1,27 +1,45 @@
-# OpenVitals
+---
+title: Home
+---
 
-OpenVitals is one of the three apps published by [Hale MTÜ](https://hale.ngo): OpenVitals is the dashboard, [OpenWatch](https://github.com/Hale-MTU/OpenWatch) pairs watches and a scale, and [OpenBridge](https://github.com/Hale-MTU/OpenBridge) is the optional way out to online services. These pages cover OpenVitals, with the [OpenWatch how-tos](how-to/wear-os-sideload.md) alongside.
+# Hale docs
 
-OpenVitals is a local-first Android app for viewing, logging, importing, and understanding health data from Health Connect.
+Documentation for the three apps published by [Hale MTÜ](https://hale.ngo), a non-profit association: free, open-source health apps for Android with no accounts, no ads and no cloud.
 
-It is for people who want a clear daily dashboard, focused metric detail screens, and explicit write/import flows without creating an account, uploading health data, or depending on an online service.
+<div class="quick-grid" markdown="1">
 
-<div class="screenshot-grid" markdown="1">
+<div markdown="1">
+### [OpenVitals](openvitals/index.md)
 
-<figure markdown="1">
-![OpenVitals dashboard](assets/images/dashboard.png){ .app-screenshot }
-<figcaption>Dashboard</figcaption>
-</figure>
+The dashboard. Reads your Health Connect records and turns them into a daily view; imports, records and logs, all on the phone.
 
-<figure markdown="1">
-![OpenVitals Daily Readiness detail](assets/images/daily-readiness.png){ .app-screenshot }
-<figcaption>Daily Readiness</figcaption>
-</figure>
+- [Install](openvitals/app/install.md)
+- [Getting started](openvitals/app/getting-started.md)
+- [Features](openvitals/features/health-connect-metrics-dashboard.md)
+- [Privacy](openvitals/app/privacy.md)
+</div>
+
+<div markdown="1">
+### [OpenWatch](openwatch/index.md)
+
+The devices. Pairs Garmin and Wear OS watches and a Xiaomi scale over Bluetooth and copies what they record into Health Connect.
+
+Documentation is being written.
+</div>
+
+<div markdown="1">
+### [OpenBridge](openbridge/index.md)
+
+The way out. An optional app that passes the data OpenVitals shares on to online services. Early stage.
+
+Documentation is being written.
+</div>
 
 </div>
 
-## Source Code
+## Help and source
 
-- Android app: [github.com/Hale-MTU/android-app](https://github.com/Hale-MTU/android-app)
-- Documentation: [github.com/Hale-MTU/docs](https://github.com/Hale-MTU/docs)
-- Translations: [translate.codeberg.org/projects/openvitals/mobile-app](https://translate.codeberg.org/projects/openvitals/mobile-app/)
+- Questions and bug reports: [OpenVitals](https://github.com/Hale-MTU/android-app/issues), [OpenWatch](https://github.com/Hale-MTU/OpenWatch/issues), [OpenBridge](https://github.com/Hale-MTU/OpenBridge/issues), [these docs](https://github.com/Hale-MTU/docs/issues)
+- Community chat: [Zulip](https://openvitals.zulipchat.com/)
+- Translations: [Codeberg Translate](https://translate.codeberg.org/projects/openvitals/mobile-app/)
+- Everything else: [hale.ngo](https://hale.ngo) and hello@hale.ngo
