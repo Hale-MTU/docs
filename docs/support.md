@@ -31,7 +31,7 @@ If you need help using the app, start with the user docs below. If OpenVitals is
 - [Contributing](developers/contributing.md)
 - [Build from source](developers/build.md)
 - [Changelog](releases/changelog.md)
-- [Documentation issues](https://github.com/OpenVitals-MTU/docs/issues)
+- [Documentation issues](https://github.com/Hale-MTU/docs/issues)
 </div>
 
 </div>

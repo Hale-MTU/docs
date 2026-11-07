@@ -12,11 +12,11 @@ type HastData = {
 const markdownAttributePattern = /\s+markdown=(["'])1\1/g
 const classAttributePattern = /^\{\s*((?:\.[A-Za-z0-9_-]+\s*)+)\}/
 const repoReferenceReplacements: [RegExp, string][] = [
-  [/ssh:\/\/git@codeberg\.org\/OpenVitals\/website\.git/g, 'git@github.com:OpenVitals-MTU/docs.git'],
-  [/https:\/\/codeberg\.org\/OpenVitals\/website\.git/g, 'https://github.com/OpenVitals-MTU/docs.git'],
-  [/https:\/\/codeberg\.org\/OpenVitals\/website/g, 'https://github.com/OpenVitals-MTU/docs'],
-  [/codeberg\.org\/OpenVitals\/website/g, 'github.com/OpenVitals-MTU/docs'],
-  [/OpenVitals\/website/g, 'OpenVitals-MTU/docs']
+  [/ssh:\/\/git@codeberg\.org\/OpenVitals\/website\.git/g, 'git@github.com:Hale-MTU/docs.git'],
+  [/https:\/\/codeberg\.org\/OpenVitals\/website\.git/g, 'https://github.com/Hale-MTU/docs.git'],
+  [/https:\/\/codeberg\.org\/OpenVitals\/website/g, 'https://github.com/Hale-MTU/docs'],
+  [/codeberg\.org\/OpenVitals\/website/g, 'github.com/Hale-MTU/docs'],
+  [/OpenVitals\/website/g, 'Hale-MTU/docs']
 ]
 
 export function remarkMkdocsCompat() {
