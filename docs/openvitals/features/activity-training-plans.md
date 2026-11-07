@@ -4,7 +4,7 @@
 > **Audience:** Users and contributors.
 > **Implementation:** `features/workoutplans`, `features/activity`, `features/manualentry/activity`.
 > **Navigation:** `Screen.WorkoutPlans`, `Screen.WorkoutPlanBuilder`, `Screen.Activity`, `Screen.ActivityEntry`, widget `WORKOUT`, `ManualEntryWidgetId.WORKOUT_PLANS`.
-> **Related:** [Feature map](feature-map.md), [Recording of activity](activity-recording.md), [Activity start proposals](https://github.com/Hale-MTU/android-app/blob/main/docs/proposals/activity-start-flow.md).
+> **Related:** [Feature map](feature-map.md), [Recording of activity](activity-recording.md), [Activity start proposals](https://github.com/Hale-MTU/OpenVitals/blob/main/docs/proposals/activity-start-flow.md).
 
 OpenVitals reads and writes Health Connect planned exercise sessions (`PlannedExerciseSessionRecord`), so a routine such as "push-ups 3×10, then 2×45 s plank" can be built once, kept in Health Connect, and started when it is time to train.
 

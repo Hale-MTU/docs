@@ -39,7 +39,7 @@ Documentation is being written.
 
 ## Help and source
 
-- Questions and bug reports: [OpenVitals](https://github.com/Hale-MTU/android-app/issues), [OpenWatch](https://github.com/Hale-MTU/OpenWatch/issues), [OpenBridge](https://github.com/Hale-MTU/OpenBridge/issues), [these docs](https://github.com/Hale-MTU/docs/issues)
+- Questions and bug reports: [OpenVitals](https://github.com/Hale-MTU/OpenVitals/issues), [OpenWatch](https://github.com/Hale-MTU/OpenWatch/issues), [OpenBridge](https://github.com/Hale-MTU/OpenBridge/issues), [these docs](https://github.com/Hale-MTU/docs/issues)
 - Community chat: [Zulip](https://openvitals.zulipchat.com/)
 - Translations: [Codeberg Translate](https://translate.codeberg.org/projects/openvitals/mobile-app/)
 - Everything else: [hale.ngo](https://hale.ngo) and hello@hale.ngo

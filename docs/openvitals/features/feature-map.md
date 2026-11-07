@@ -6,11 +6,11 @@ The app is Kotlin and Jetpack Compose. Screens are composables, screen state liv
 
 Source-of-truth anchors:
 
-- Routes: [`Screen.kt`](https://github.com/Hale-MTU/android-app/blob/main/app/src/main/kotlin/tech/mmarca/openvitals/navigation/Screen.kt)
-- Metric route fan-out: [`AppNavigationMetricRoutes.kt`](https://github.com/Hale-MTU/android-app/blob/main/app/src/main/kotlin/tech/mmarca/openvitals/navigation/AppNavigationMetricRoutes.kt)
-- Dashboard widgets: [`DashboardWidgetId.kt`](https://github.com/Hale-MTU/android-app/blob/main/app/src/main/kotlin/tech/mmarca/openvitals/features/dashboard/DashboardWidgetId.kt)
-- Manual entry widgets: [`ManualEntryWidgetId.kt`](https://github.com/Hale-MTU/android-app/blob/main/app/src/main/kotlin/tech/mmarca/openvitals/features/manualentry/ManualEntryWidgetId.kt)
-- Settings sections: [`SettingsSection.kt`](https://github.com/Hale-MTU/android-app/blob/main/app/src/main/kotlin/tech/mmarca/openvitals/features/settings/SettingsSection.kt)
+- Routes: [`Screen.kt`](https://github.com/Hale-MTU/OpenVitals/blob/main/app/src/main/kotlin/tech/mmarca/openvitals/navigation/Screen.kt)
+- Metric route fan-out: [`AppNavigationMetricRoutes.kt`](https://github.com/Hale-MTU/OpenVitals/blob/main/app/src/main/kotlin/tech/mmarca/openvitals/navigation/AppNavigationMetricRoutes.kt)
+- Dashboard widgets: [`DashboardWidgetId.kt`](https://github.com/Hale-MTU/OpenVitals/blob/main/app/src/main/kotlin/tech/mmarca/openvitals/features/dashboard/DashboardWidgetId.kt)
+- Manual entry widgets: [`ManualEntryWidgetId.kt`](https://github.com/Hale-MTU/OpenVitals/blob/main/app/src/main/kotlin/tech/mmarca/openvitals/features/manualentry/ManualEntryWidgetId.kt)
+- Settings sections: [`SettingsSection.kt`](https://github.com/Hale-MTU/OpenVitals/blob/main/app/src/main/kotlin/tech/mmarca/openvitals/features/settings/SettingsSection.kt)
 
 | Area | User docs | Routes and widgets | Implementation |
 |---|---|---|---|
