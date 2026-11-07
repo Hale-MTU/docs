@@ -19,7 +19,7 @@ Include:
 
 Use the Android app repository for app bugs:
 
-[github.com/Hale-MTU/android-app/issues](https://github.com/Hale-MTU/android-app/issues)
+[github.com/Hale-MTU/OpenVitals/issues](https://github.com/Hale-MTU/OpenVitals/issues)
 
 Use the documentation repository for documentation or website issues:
 

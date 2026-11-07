@@ -4,15 +4,15 @@ OpenVitals talks to a Wear OS watch through its own small watch app. The watch a
 
 For what the watch app does once installed, see [Smartwatches](../features/smartwatches.md#wear-os).
 
-Everything below is driven by three small scripts in the OpenVitals repository: [`scripts/wear-pair.sh`](https://github.com/Hale-MTU/android-app/blob/main/scripts/wear-pair.sh), [`scripts/wear-skip-onboarding.sh`](https://github.com/Hale-MTU/android-app/blob/main/scripts/wear-skip-onboarding.sh) and [`scripts/wear-install.sh`](https://github.com/Hale-MTU/android-app/blob/main/scripts/wear-install.sh). Each step can also be typed by hand; the commands are listed at the end.
+Everything below is driven by three small scripts in the OpenVitals repository: [`scripts/wear-pair.sh`](https://github.com/Hale-MTU/OpenVitals/blob/main/scripts/wear-pair.sh), [`scripts/wear-skip-onboarding.sh`](https://github.com/Hale-MTU/OpenVitals/blob/main/scripts/wear-skip-onboarding.sh) and [`scripts/wear-install.sh`](https://github.com/Hale-MTU/OpenVitals/blob/main/scripts/wear-install.sh). Each step can also be typed by hand; the commands are listed at the end.
 
 ## Prerequisites
 
 On the computer:
 
-- A clone of the [OpenVitals repository](https://github.com/Hale-MTU/android-app).
+- A clone of the [OpenVitals repository](https://github.com/Hale-MTU/OpenVitals).
 - Android platform-tools (`adb`). The script finds it on `PATH`, in `$ANDROID_HOME/platform-tools`, or in the default SDK location under your home directory.
-- To build the watch app yourself: a JDK and the Android SDK, the same setup as [development.md](https://github.com/Hale-MTU/android-app/blob/main/docs/engineering/development.md). To install an APK you already have, neither is needed; pass it with `--apk`.
+- To build the watch app yourself: a JDK and the Android SDK, the same setup as [development.md](https://github.com/Hale-MTU/OpenVitals/blob/main/docs/engineering/development.md). To install an APK you already have, neither is needed; pass it with `--apk`.
 - Optional: `avahi-browse` (package `avahi-utils`) makes discovery more reliable on Linux desktops that run their own mDNS daemon.
 
 On the watch:

@@ -25,8 +25,8 @@ implementation survives only in git history.
 ### Build And Run
 
 ```bash
-git clone https://github.com/Hale-MTU/android-app.git
-cd android-app
+git clone https://github.com/Hale-MTU/OpenVitals.git
+cd OpenVitals
 ./gradlew :app:installDebug
 ```
 

@@ -20,6 +20,6 @@ It is for people who want a clear daily dashboard, focused metric detail screens
 
 ## Source Code
 
-- Android app: [github.com/Hale-MTU/android-app](https://github.com/Hale-MTU/android-app)
+- Android app: [github.com/Hale-MTU/OpenVitals](https://github.com/Hale-MTU/OpenVitals)
 - Documentation: [github.com/Hale-MTU/docs](https://github.com/Hale-MTU/docs)
 - Translations: [translate.codeberg.org/projects/openvitals/mobile-app](https://translate.codeberg.org/projects/openvitals/mobile-app/)
