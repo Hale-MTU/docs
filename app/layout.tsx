@@ -8,7 +8,7 @@ import './globals.css'
 import logo from '../docs/assets/images/openvitals-logo.png'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://openvitals.health'),
+  metadataBase: new URL('https://docs.hale.ngo'),
   title: {
     default: 'OpenVitals',
     template: '%s - OpenVitals'
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     title: 'OpenVitals',
     description: 'Local-first Android health dashboard powered by Health Connect.',
     siteName: 'OpenVitals',
-    url: 'https://openvitals.health'
+    url: 'https://docs.hale.ngo'
   }
 }
 
@@ -30,7 +30,7 @@ const navbar = (
         <b>OpenVitals</b>
       </span>
     }
-    projectLink="https://github.com/OpenVitals-MTU/docs"
+    projectLink="https://github.com/Hale-MTU/docs"
   />
 )
 
@@ -48,9 +48,9 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <Layout
           navbar={navbar}
           pageMap={await getPageMap()}
-          docsRepositoryBase="https://github.com/OpenVitals-MTU/docs/blob/main/docs"
+          docsRepositoryBase="https://github.com/Hale-MTU/docs/blob/main/docs"
           editLink="Edit this page"
-          feedback={{ link: 'https://github.com/OpenVitals-MTU/docs/issues/new' }}
+          feedback={{ link: 'https://github.com/Hale-MTU/docs/issues/new' }}
           footer={footer}
         >
           {children}

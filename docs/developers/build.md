@@ -25,7 +25,7 @@ implementation survives only in git history.
 ### Build And Run
 
 ```bash
-git clone https://github.com/OpenVitals-MTU/android-app.git
+git clone https://github.com/Hale-MTU/android-app.git
 cd android-app
 ./gradlew :app:installDebug
 ```
@@ -58,7 +58,7 @@ The local app is the Health Connect-only app and should stay internet-free.
 Clone this documentation repository:
 
 ```bash
-git clone https://github.com/OpenVitals-MTU/docs.git
+git clone https://github.com/Hale-MTU/docs.git
 cd docs
 npm install
 npm run dev

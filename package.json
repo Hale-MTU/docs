@@ -4,10 +4,10 @@
   "private": true,
   "license": "AGPL-3.0-or-later",
   "description": "OpenVitals documentation site.",
-  "homepage": "https://openvitals.health/",
+  "homepage": "https://docs.hale.ngo/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/OpenVitals-MTU/docs.git"
+    "url": "https://github.com/Hale-MTU/docs.git"
   },
   "scripts": {
     "dev": "next dev --webpack",
