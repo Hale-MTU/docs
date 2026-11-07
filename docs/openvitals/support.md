@@ -54,7 +54,7 @@ Translations help make the local-first health dashboard usable for more people w
 
 OpenVitals is free and open source. Contributions through Liberapay fund the ongoing development, testing, documentation, releases, and maintenance needed to keep the project moving. Funding does not change the app's local-first model: the Android app remains free of accounts, ads, analytics, and OpenVitals cloud sync.
 
-<a class="liberapay-badge" href="https://liberapay.com/manuel.mmarca.tech/donate"><img alt="Support OpenVitals on Liberapay" src="https://liberapay.com/assets/widgets/donate.svg" width="83" height="30"></a>
+<a class="liberapay-badge" href="https://liberapay.com/hale.mtu/donate"><img alt="Support OpenVitals on Liberapay" src="https://liberapay.com/assets/widgets/donate.svg" width="83" height="30"></a>
 
 ## What Support Helps With
 
