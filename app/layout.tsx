@@ -5,19 +5,21 @@ import { Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import 'nextra-theme-docs/style.css'
 import './globals.css'
-import logo from '../docs/assets/images/openvitals-logo.png'
+import logo from '../docs/assets/images/hale-mark.png'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://docs.hale.ngo'),
   title: {
-    default: 'OpenVitals',
-    template: '%s - OpenVitals'
+    default: 'Hale docs',
+    template: '%s - Hale docs'
   },
-  description: 'Local-first Android health dashboard powered by Health Connect.',
+  description:
+    'Documentation for OpenVitals, OpenWatch and OpenBridge, the free, offline health apps for Android published by Hale MTÜ.',
   openGraph: {
-    title: 'OpenVitals',
-    description: 'Local-first Android health dashboard powered by Health Connect.',
-    siteName: 'OpenVitals',
+    title: 'Hale docs',
+    description:
+      'Documentation for OpenVitals, OpenWatch and OpenBridge, the free, offline health apps for Android published by Hale MTÜ.',
+    siteName: 'Hale',
     url: 'https://docs.hale.ngo'
   }
 }
@@ -27,7 +29,8 @@ const navbar = (
     logo={
       <span className="openvitals-brand">
         <img src={logo.src} alt="" width="28" height="28" />
-        <b>OpenVitals</b>
+        <b>Hale</b>
+        <span>docs</span>
       </span>
     }
     projectLink="https://github.com/Hale-MTU/docs"
@@ -36,7 +39,9 @@ const navbar = (
 
 const footer = (
   <Footer>
-    <span>OpenVitals documentation</span>
+    <span>
+      <a href="https://hale.ngo">Hale MTÜ</a>: OpenVitals, OpenWatch and OpenBridge documentation
+    </span>
   </Footer>
 )
 
