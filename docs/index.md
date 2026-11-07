@@ -1,5 +1,7 @@
 # OpenVitals
 
+OpenVitals is one of the three apps published by [Hale MTÜ](https://hale.ngo): OpenVitals is the dashboard, [OpenWatch](https://github.com/Hale-MTU/OpenWatch) pairs watches and a scale, and [OpenBridge](https://github.com/Hale-MTU/OpenBridge) is the optional way out to online services. These pages cover OpenVitals, with the [OpenWatch how-tos](how-to/wear-os-sideload.md) alongside.
+
 OpenVitals is a local-first Android app for viewing, logging, importing, and understanding health data from Health Connect.
 
 It is for people who want a clear daily dashboard, focused metric detail screens, and explicit write/import flows without creating an account, uploading health data, or depending on an online service.
