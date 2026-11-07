@@ -39,7 +39,7 @@ Where Health Connect offers medical records, OpenVitals reads and writes them in
 - Read: vaccines, allergies, conditions, medications, lab results, procedures, visits, vital signs, pregnancy, social history, personal details, and practitioner details. Each category has its own permission.
 - Write: records the user imports from a FHIR file or an Apple Health export. OpenVitals deletes only the records and sources it wrote, when the user asks.
 
-Medical records need Android 14 or newer, with a Health Connect module that supports them. Android 13 and older never get them. OpenVitals asks for these permissions only inside its Medical records area, never together with other permissions. See [Medical records](/features/medical-records).
+Medical records need Android 14 or newer, with a Health Connect module that supports them. Android 13 and older never get them. OpenVitals asks for these permissions only inside its Medical records area, never together with other permissions. See [Medical records](/openvitals/features/medical-records).
 
 ## History And Background Access
 

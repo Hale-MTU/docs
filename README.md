@@ -1,6 +1,8 @@
-# OpenVitals Docs
+# Hale Docs
 
-Nextra documentation site for OpenVitals.
+Nextra documentation site for the apps published by Hale MTÜ: OpenVitals, OpenWatch and OpenBridge.
+
+The content lives in `docs/`, one folder per app: `docs/openvitals/`, `docs/openwatch/` and `docs/openbridge/`, under the Hale docs home `docs/index.md`. Each folder's `_meta.ts` is that app's sidebar; `docs/_meta.ts` is the navbar.
 
 Repository:
 
@@ -54,7 +56,7 @@ The GitHub Actions workflow (`.github/workflows/test.yml`) builds the Nextra sit
 
 One-time setup: in the repository's Settings → Pages, set the source to "GitHub Actions" and the custom domain to `docs.hale.ngo`, and turn on "Enforce HTTPS" once the certificate is issued. In DNS, `docs` is a `CNAME` record on hale.ngo pointing to `hale-mtu.github.io`. The apex `hale.ngo` belongs to the landing page, not this site. The old address, docs.openvitals.health, is served by a separate redirect site that forwards every path here.
 
-A section without an index page (`/app/`, `/features/`) has a small redirect page in `public/` that sends old links to its first page, since a static host has no server-side redirects.
+A static host has no server-side redirects, so `public/` holds small redirect pages. A section without an index page (`/openvitals/app/`, `/openvitals/features/`, `/openvitals/releases/`, `/openvitals/developers/`) sends links to its first page. Every address from before OpenVitals moved under `/openvitals/` (`/app/privacy/`, `/features/scales/` and the rest) sends links to the same page in its new place; the OpenVitals app, its Play listing and the landing page link to some of them.
 
 ## License
 

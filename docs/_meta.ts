@@ -1,32 +1,22 @@
 import type { MetaRecord } from 'nextra'
 
+// The navbar: the Hale docs home and one entry per app. Each app's folder
+// holds its own sidebar.
 export default {
   index: {
     title: 'Home',
     type: 'page'
   },
-  app: {
-    title: 'Start Here',
+  openvitals: {
+    title: 'OpenVitals',
     type: 'page'
   },
-  features: {
-    title: 'Features',
+  openwatch: {
+    title: 'OpenWatch',
     type: 'page'
   },
-  'how-to': {
-    title: 'How-to Guides',
-    type: 'page'
-  },
-  support: {
-    title: 'Support',
-    type: 'page'
-  },
-  releases: {
-    title: 'Releases',
-    type: 'page'
-  },
-  developers: {
-    title: 'Developers',
+  openbridge: {
+    title: 'OpenBridge',
     type: 'page'
   },
   '404': {
