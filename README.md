@@ -4,7 +4,14 @@ Nextra documentation site for the apps published by Hale MTÜ: OpenVitals, OpenW
 
 The content lives in `docs/`, one folder each: `docs/openvitals/`, `docs/openwatch/`, `docs/openbridge/` and `docs/openlink/`, under the Hale docs home `docs/index.md`. Each folder's `_meta.ts` is its sidebar; `docs/_meta.ts` is the navbar.
 
-Some pages are ported from the apps' repositories and say so at the bottom ("kept in step with ..."): OpenWatch's watches, Wear OS install, permissions, privacy, release notes and developer pages, and OpenLink's specification. Change those in the app's repository first, then here, so the two say the same.
+Some pages are ported from the apps' repositories and say so at the bottom ("kept in step with ..."): OpenWatch's watches, Wear OS install, permissions, privacy, release notes and developer pages, and OpenLink's specification. `scripts/app-docs.json` lists them. Edit them in the app's repository, never here: `scripts/sync-app-docs.py` writes them again, rewriting their links for the site, and the `sync-app-docs` workflow runs it once a day (and by hand), builds the site and opens a pull request when a page changed. Locally:
+
+```bash
+python3 scripts/sync-app-docs.py           # clone the repositories and write the pages
+python3 scripts/sync-app-docs.py --check   # fail if a page is out of step
+```
+
+A new ported page goes into `scripts/app-docs.json` and its section's `_meta.ts`. For the workflow to open its pull requests, Settings, Actions, General has to allow GitHub Actions to create pull requests.
 
 Repository:
 
