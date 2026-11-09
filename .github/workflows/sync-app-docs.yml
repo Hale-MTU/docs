@@ -1,0 +1,68 @@
+# Keeps the pages ported from the apps' repositories in step with them
+# (scripts/app-docs.json, scripts/sync-app-docs.py). Once a day, and by hand,
+# it ports every listed page again; when one changed, it builds the site to
+# be sure it still builds, and opens a pull request from sync/app-docs, or
+# updates the one already open. Nothing reaches main without a merge.
+#
+# A pull request opened with the workflow's token runs no other workflow, so
+# the build happens here. Opening it needs Settings, Actions, General,
+# "Allow GitHub Actions to create and approve pull requests"; without it the
+# branch is pushed and the run says so.
+name: sync-app-docs
+
+on:
+  schedule:
+    - cron: "17 4 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: sync-app-docs
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - id: port
+        name: Port the pages
+        run: |
+          python3 scripts/sync-app-docs.py | tee "$RUNNER_TEMP/sync.txt"
+          if git diff --quiet; then echo "changed=false" >> "$GITHUB_OUTPUT"; else echo "changed=true" >> "$GITHUB_OUTPUT"; fi
+      - if: steps.port.outputs.changed == 'true'
+        uses: actions/setup-node@v5
+        with:
+          node-version: 26
+          cache: npm
+      - if: steps.port.outputs.changed == 'true'
+        name: Build the site
+        run: |
+          npm ci
+          npm run build
+          git diff --check
+      - if: steps.port.outputs.changed == 'true'
+        name: Open or update the pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          branch=sync/app-docs
+          git switch -C "$branch"
+          git add docs
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -q -m "Sync the pages ported from the apps' repositories" -m "$(cat "$RUNNER_TEMP/sync.txt")"
+          git push -q --force origin "$branch"
+          if [ "$(gh pr view "$branch" --json state --jq .state 2>/dev/null)" = "OPEN" ]; then
+            echo "::notice::Updated the open pull request: $(gh pr view "$branch" --json url --jq .url)"
+            exit 0
+          fi
+          body="The apps' repositories changed pages this site ports (scripts/app-docs.json). Ported by scripts/sync-app-docs.py; the site builds.
+
+          $(cat "$RUNNER_TEMP/sync.txt")"
+          if ! gh pr create --base main --head "$branch" --title "Sync the pages ported from the apps' repositories" --body "$body"; then
+            echo "::error::Pushed $branch, but could not open a pull request. Allow it in Settings, Actions, General (\"Allow GitHub Actions to create and approve pull requests\"), or open one from $branch by hand."
+            exit 1
+          fi

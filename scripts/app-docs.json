@@ -1,0 +1,18 @@
+{
+  "//": "Pages ported from the apps' repositories: repository path -> site path under docs/. scripts/sync-app-docs.py reads this; the workflow sync-app-docs.yml runs it.",
+  "repositories": {
+    "Hale-MTU/OpenWatch": {
+      "PRIVACY.md": "openwatch/privacy.md",
+      "docs/features/watches.md": "openwatch/watches.md",
+      "docs/how-to/wear-os-sideload.md": "openwatch/wear-os-sideload.md",
+      "docs/app/permissions.md": "openwatch/permissions.md",
+      "docs/releases/0.1.1.md": "openwatch/releases/0.1.1.md",
+      "docs/engineering/architecture.md": "openwatch/developers/architecture.md",
+      "docs/engineering/development.md": "openwatch/developers/development.md",
+      "docs/engineering/sleep-minute-features.md": "openwatch/developers/sleep-minute-features.md"
+    },
+    "Hale-MTU/OpenLink": {
+      "docs/spec.md": "openlink/specification.md"
+    }
+  }
+}
