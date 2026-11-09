@@ -55,7 +55,7 @@ OpenVitals asks for read permissions for dashboard and detail views. Write permi
 
 Settings provide Data Importers for Apple Health export import and FIT activity/course/workout import, plus entry points for offline map pack import and Bluetooth LE sensor management.
 
-**Sensors & devices** manages Bluetooth LE sensors that stream while an activity is recorded. **Watches** pairs a Garmin watch, or a Wear OS watch running the OpenVitals watch app, and copies what it recorded; any other watch syncs into Health Connect through Gadgetbridge or its vendor's app instead, see [Smartwatches](smartwatches.md). **Scales** saves weigh-ins from a supported Bluetooth scale, see [Bathroom Scales](scales.md). Apple Health exports are analyzed first so the user can choose detected categories before anything is written to Health Connect. Import results can be copied or downloaded as a full text report with summary, selected categories, logs, diagnostics, and failure details.
+**Sensors & devices** manages Bluetooth LE sensors that stream while an activity is recorded. **OpenWatch** says where OpenVitals stands with the [OpenWatch](../../openwatch/index.md) app, which pairs watches and the scale: not installed, waiting for approval, blocked, or connected with the watches it sees, what OpenWatch allows, and when the body profile last synced, with a button to sync it now. See [Smartwatches](smartwatches.md). Apple Health exports are analyzed first so the user can choose detected categories before anything is written to Health Connect. Import results can be copied or downloaded as a full text report with summary, selected categories, logs, diagnostics, and failure details.
 
 ## Diagnostics And App Information
 

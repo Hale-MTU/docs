@@ -40,17 +40,11 @@ OpenVitals needs precise location to record route-backed activities. Without it,
 
 OpenVitals uses nearby-device Bluetooth permissions to connect to paired Bluetooth LE sensors during experimental activity recording. This does not add internet access.
 
-## Can OpenVitals Connect To My Smartwatch?
+## Can OpenVitals Sync My Watch Or Scale?
 
-It depends on the watch. See [Smartwatches](../features/smartwatches.md) for the details.
+Not by itself. Watch and scale support (Garmin and Wear OS watches, the Xiaomi S400 scale) is the separate [OpenWatch](../../openwatch/index.md) app. It writes what those devices record to Health Connect, and OpenVitals reads it from there like any other source. With OpenWatch installed, OpenVitals also shows the paired watch on its dashboard and can use a watch's live heart rate while it records an activity; see [Smartwatches](../features/smartwatches.md). A watch that broadcasts its heart rate over Bluetooth LE can still be used as a sensor while recording an activity.
 
-- **Garmin:** yes, experimentally. OpenVitals pairs with the watch over Bluetooth, with no Garmin account, and syncs its activities, sleep and wellness data into Health Connect. It can also forward phone notifications, send the weather and change the watch's settings.
-- **Wear OS:** a watch running the OpenVitals Wear OS app syncs its heart rate and one estimated sleep session per night. The watch app is for testers and is installed from a computer; see [Install the Wear OS App](../how-to/wear-os-sideload.md).
-- **Any other watch:** sync it with [Gadgetbridge](https://gadgetbridge.org) or your vendor's app so its data lands in Health Connect. OpenVitals reads everything from there — steps, heart rate, sleep, HRV, workouts — and shows which app each record came from.
-
-Either way, OpenVitals talks to a watch over Bluetooth only and still has no internet permission.
-
-Bluetooth LE sensors are different: heart-rate straps and cycling cadence/power sensors still stream live into an activity recording. See [Bluetooth LE sensors](../features/ble-sensors.md).
+Any other watch syncs through [Gadgetbridge](https://gadgetbridge.org) or your vendor's app, so its data lands in Health Connect too.
 
 ## Why Does OpenVitals Need Notification Permission?
 

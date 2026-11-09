@@ -1,8 +1,10 @@
 # Hale Docs
 
-Nextra documentation site for the apps published by Hale MTÜ: OpenVitals, OpenWatch and OpenBridge.
+Nextra documentation site for the apps published by Hale MTÜ: OpenVitals, OpenWatch and OpenBridge, and OpenLink, the link between OpenVitals and OpenWatch.
 
-The content lives in `docs/`, one folder per app: `docs/openvitals/`, `docs/openwatch/` and `docs/openbridge/`, under the Hale docs home `docs/index.md`. Each folder's `_meta.ts` is that app's sidebar; `docs/_meta.ts` is the navbar.
+The content lives in `docs/`, one folder each: `docs/openvitals/`, `docs/openwatch/`, `docs/openbridge/` and `docs/openlink/`, under the Hale docs home `docs/index.md`. Each folder's `_meta.ts` is its sidebar; `docs/_meta.ts` is the navbar.
+
+Some pages are ported from the apps' repositories and say so at the bottom ("kept in step with ..."): OpenWatch's watches, Wear OS install, permissions, privacy, release notes and developer pages, and OpenLink's specification. Change those in the app's repository first, then here, so the two say the same.
 
 Repository:
 
