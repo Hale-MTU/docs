@@ -42,7 +42,7 @@ The way out. An optional app that passes the data OpenVitals shares on to online
 
 </div>
 
-OpenVitals and OpenWatch talk to each other on the phone through [OpenLink](openlink/index.md): the body profile, the paired watches and a watch's live heart rate, with no network.
+OpenVitals and OpenWatch talk to each other on the phone through [OpenLink](openlink/index.md): the body profile, the paired watches and a watch's live heart rate, with no network. [Architecture](architecture.md) shows how the pieces fit together and where your data goes.
 
 ## Help and source
 
