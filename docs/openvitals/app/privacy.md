@@ -2,6 +2,8 @@
 
 OpenVitals is designed as a local-first app. The local Android app is intentionally separate from any connected app work.
 
+OpenVitals is published by Mittetulundusühing Hale (MTÜ Hale), a non-profit association registered in Estonia, registry code 80677610. Privacy contact: [hello@hale.ngo](mailto:hello@hale.ngo).
+
 The local app:
 
 - Does not ship app-level internet permission.
