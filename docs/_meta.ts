@@ -1,7 +1,7 @@
 import type { MetaRecord } from 'nextra'
 
-// The navbar: the Hale docs home and one entry per app. Each app's folder
-// holds its own sidebar.
+// The navbar: the Hale docs home, one entry per app, and OpenLink, the link
+// between OpenVitals and OpenWatch. Each folder holds its own sidebar.
 export default {
   index: {
     title: 'Home',
@@ -17,6 +17,10 @@ export default {
   },
   openbridge: {
     title: 'OpenBridge',
+    type: 'page'
+  },
+  openlink: {
+    title: 'OpenLink',
     type: 'page'
   },
   '404': {

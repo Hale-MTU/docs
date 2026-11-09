@@ -5,7 +5,7 @@ OpenVitals can show the turn-by-turn guidance CoMaps is giving at that moment: t
 There are two independent places that guidance can appear, each with its own switch:
 
 - **In an activity recording** - the turn strip, the route on the offline map, and the dashboard tile described below. Off by default, switched on in Settings > Activity recording.
-- **On a Garmin watch** - the next turn sent to the wrist as a notification that updates in place. Off by default, switched on per watch on its device screen. See [Smartwatches](smartwatches.md).
+- **On a Garmin watch** - [OpenWatch](../../openwatch/watches.md#comaps-guidance-on-the-watch) reads the same guidance from CoMaps and sends the next turn to the wrist as a notification that updates in place. Off by default, switched on per watch on its device screen in OpenWatch.
 
 Neither one requires the other. Guidance on the watch alone reaches the watch without a recording running, the recording integration alone shows in the recording, and both on shows in both places. Either way it needs a CoMaps build that shares navigation data, and is guarded by CoMaps' own runtime permission - each surface requests that permission for itself.
 

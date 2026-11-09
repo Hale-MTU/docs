@@ -41,7 +41,6 @@ export default {
   'activity-training-plans': 'Activity And Training Plans',
   'ble-sensors': 'Bluetooth LE Sensors',
   smartwatches: 'Smartwatches',
-  scales: 'Bathroom Scales',
   'route-file-import': 'GPX/KML/KMZ Route Import',
   'fit-files-import': 'FIT Files Import',
   'offline-maps-support': 'Offline Maps Support',

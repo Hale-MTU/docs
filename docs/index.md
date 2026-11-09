@@ -24,7 +24,11 @@ The dashboard. Reads your Health Connect records and turns them into a daily vie
 
 The devices. Pairs Garmin and Wear OS watches and a Xiaomi scale over Bluetooth and copies what they record into Health Connect.
 
-Documentation is being written.
+- [Install](openwatch/install.md)
+- [Watches](openwatch/watches.md)
+- [Xiaomi S400 scale](openwatch/scale.md)
+- [Connected apps](openwatch/connected-apps.md)
+- [Privacy](openwatch/privacy.md)
 </div>
 
 <div markdown="1">
@@ -32,10 +36,13 @@ Documentation is being written.
 
 The way out. An optional app that passes the data OpenVitals shares on to online services. Early stage.
 
-Documentation is being written.
+- [How it gets data](openbridge/index.md#how-it-gets-data)
+- [OpenVitals builds](openbridge/index.md#openvitals-builds)
 </div>
 
 </div>
+
+OpenVitals and OpenWatch talk to each other on the phone through [OpenLink](openlink/index.md): the body profile, the paired watches and a watch's live heart rate, with no network.
 
 ## Help and source
 
