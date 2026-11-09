@@ -7,6 +7,10 @@ export default {
     title: 'Home',
     type: 'page'
   },
+  architecture: {
+    title: 'Architecture',
+    type: 'page'
+  },
   openvitals: {
     title: 'OpenVitals',
     type: 'page'
