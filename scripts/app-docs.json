@@ -6,6 +6,7 @@
       "docs/features/watches.md": "openwatch/watches.md",
       "docs/how-to/wear-os-sideload.md": "openwatch/wear-os-sideload.md",
       "docs/app/permissions.md": "openwatch/permissions.md",
+      "docs/releases/0.3.0.md": "openwatch/releases/0.3.0.md",
       "docs/releases/0.1.1.md": "openwatch/releases/0.1.1.md",
       "docs/engineering/architecture.md": "openwatch/developers/architecture.md",
       "docs/engineering/development.md": "openwatch/developers/development.md",
