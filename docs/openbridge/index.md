@@ -21,7 +21,7 @@ Every answer carries a status. `sharing_off` means the switch in OpenVitals is o
 
 ## OpenVitals builds
 
-Each OpenVitals build names its permissions and its provider after its own application id: `tech.mmarca.openvitals`, `.debug` or `.ci`. The bridge asks for all three and reads from whichever is installed; with more than one, it lets you choose. The sharing API is only in debug and ci builds of OpenVitals for now.
+Each OpenVitals build names its permissions and its provider after its own application id: `tech.mmarca.openvitals`, `.debug` or `.ci`. The bridge asks for all three and reads from whichever is installed; with more than one, it lets you choose. The sharing API is in OpenVitals' nightly builds, and in its releases after 2.17.0. Sending a workout to a service also needs that OpenVitals, since it writes the workout's file.
 
 Install OpenVitals before the bridge. Android may not offer a permission that another app defined after the bridge was installed; reinstall the bridge if a group never shows a dialog.
 
