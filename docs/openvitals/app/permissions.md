@@ -142,6 +142,23 @@ They are asked for in one request, only inside the medical records area, and nev
 - `android.permission.POST_NOTIFICATIONS`: used for activity recording, Apple Health import progress, and reminder notifications.
 - `android.permission.RECEIVE_BOOT_COMPLETED`: used to reschedule reminders after reboot or app update.
 
+## Data Sharing Permissions
+
+OpenVitals defines these permissions; it does not ask for them. Another app asks for one to read that kind of data ([Share with other apps](../features/data-sharing.md)), and Android shows you its Allow dialog.
+
+- `tech.mmarca.openvitals.permission.READ_ACTIVITY`
+- `tech.mmarca.openvitals.permission.READ_WORKOUTS`
+- `tech.mmarca.openvitals.permission.READ_ROUTES`
+- `tech.mmarca.openvitals.permission.READ_SLEEP`
+- `tech.mmarca.openvitals.permission.READ_HEART`
+- `tech.mmarca.openvitals.permission.READ_VITALS`
+- `tech.mmarca.openvitals.permission.READ_BODY`
+- `tech.mmarca.openvitals.permission.READ_NUTRITION`
+- `tech.mmarca.openvitals.permission.READ_RECOVERY`
+- `tech.mmarca.openvitals.permission.READ_CYCLE`
+- `tech.mmarca.openvitals.permission.READ_SEXUAL_ACTIVITY`
+- `tech.mmarca.openvitals.permission.WRITE_DATA`: no other app can hold it. It guards writes, which are refused anyway.
+
 ## Removed Network Permissions
 
 The manifest explicitly removes inherited network permissions from dependencies:
