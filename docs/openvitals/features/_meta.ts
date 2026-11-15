@@ -50,6 +50,7 @@ export default {
   'csv-import': 'CSV Import',
   'device-sync': 'Sync With Another Phone',
   'health-report-export': 'Health Report Export',
+  'data-sharing': 'Share With Other Apps',
   'preloaded-beverage-nutrition': 'Preloaded Beverage Nutrition Reference',
   reminders: 'Reminders',
   '---privacy-developers': {

@@ -41,6 +41,17 @@ Cycle tracking uses sensitive Health Connect records and is shown only after cyc
 
 Workout route previews require manual Health Connect approval in some cases. GPS recording requires location permission because OpenVitals needs location points to build the route. Imported PMTiles or Mapsforge map packs stay local on the device.
 
+## Sharing With Other Apps
+
+Another app on your phone can read OpenVitals data only if all of this is true:
+
+- you turned on Settings, Share with other apps. It is off by default;
+- the app asked Android for a kind of data, and you allowed it in Android's own dialog. There are 11 kinds, each asked for on its own.
+
+OpenVitals stays offline either way, but an app you allow can send what it reads elsewhere, and its own privacy policy applies. Medical records and the cycle journal's notes are never shared, and another app cannot change anything. See [Share with other apps](../features/data-sharing.md).
+
+This is in OpenVitals' nightly builds, and in its releases after 2.17.0.
+
 ## Permission Details
 
 See [Permissions](permissions.md) for the current permission list and why each group is requested.
