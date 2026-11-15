@@ -1,6 +1,6 @@
 # OpenBridge
 
-OpenVitals is offline: it has no internet permission. OpenBridge is a separate app, published by [Hale](https://hale.ngo) like [OpenVitals](../openvitals/index.md), that reads the data OpenVitals shares and can reach the internet, so it can pass that data on to other services. No service is connected yet.
+OpenVitals is offline: it has no internet permission. OpenBridge is a separate app, published by [Hale](https://hale.ngo) like [OpenVitals](../openvitals/index.md), that reads the data OpenVitals shares and can reach the internet, so it can pass that data on to other services. The first service is [VertMatch](vertmatch.md). What OpenBridge reads, sends and keeps is in [Privacy](privacy.md).
 
 ## How it gets data
 
