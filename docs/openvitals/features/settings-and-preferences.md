@@ -12,7 +12,7 @@ Settings centralize app preferences, Health Connect access, imports, sensors, go
 
 Users can configure:
 
-- Language.
+- Language: English or one of the fourteen shipped translations (Ukrainian since 2.17.0), or the system's.
 - Unit system.
 - Theme mode, including system, light, dark, and AMOLED.
 - Home widget refresh interval: 15, 30, 60 or 120 minutes.
@@ -30,7 +30,7 @@ Metric-specific settings include:
 - Sleep range mode, including rolling 24 hours, noon boundary, and evening boundary.
 - Caffeine sensitivity, daily limit, and bedtime guidance.
 - Blood pressure guideline: ACC/AHA 2017, ESH 2023, ESC 2024 or ISH 2020, see [Heart and vitals](heart-and-vitals.md).
-- Body profile: birth year, weight, height, resting and maximum heart rate, and sex, which only the basal metabolic rate estimate reads.
+- Body profile: birth year, weight, height, resting and maximum heart rate, and sex. The workout calorie estimates, the basal metabolic rate, cardio load, the heart rate zones and the maximum heart rate read it; without a sex, the calorie estimate and cardio load take the mean of the men's and women's formulas. With [OpenWatch](../../openwatch/index.md) installed and connected, the profile is kept the same in both apps.
 - Basal metabolic rate estimate, off by default: one Mifflin-St Jeor value per day written to Health Connect, see [Body metrics](body-metrics.md).
 - Body Energy calibration.
 - A Start over card that wipes and rebuilds the Body Energy, Recovery and Expenditure history OpenVitals worked out itself, see [Body Energy](body-energy.md).
@@ -59,4 +59,4 @@ Settings provide Data Importers for Apple Health export import and FIT activity/
 
 ## Diagnostics And App Information
 
-The settings area includes app version information, diagnostics/support surfaces, and privacy notes.
+The settings area includes app version information, with the publisher under the version line, "Hale · hale.ngo", diagnostics/support surfaces, and privacy notes.

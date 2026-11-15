@@ -2,7 +2,7 @@
 
 > **Status:** Current implemented behavior.
 > **Audience:** Users and contributors.
-> **Implementation:** `features/bodyenergy`, `features/readiness`, `domain/insights/BodyEnergyTimeline.kt`, `domain/insights/BodyEnergyCalibrationFit.kt`.
+> **Implementation:** `features/bodyenergy`, `features/readiness`; the calculation is `insights/BodyEnergyTimeline.kt` in [health-calculations](https://github.com/Hale-MTU/health-calculations), shared with OpenWatch.
 > **Navigation:** `Screen.BodyEnergyDetails`, widget `BODY_ENERGY`, settings section `RECOVERY`.
 > **Related:** [Feature map](feature-map.md), [Daily readiness](daily-readiness.md), [Sleep score and recovery](sleep-score-and-recovery.md), [Home screen widgets](home-widgets.md).
 
@@ -20,9 +20,9 @@ The detail view reads as a story for the selected day: the battery first (the sc
 
 ## Calibration
 
-Body Energy supports calibration during onboarding and in Recovery settings. Calibration helps the local estimate better fit the user, and can be reset when needed.
+Body Energy supports calibration during onboarding and in Recovery settings. Calibration helps the local estimate better fit the user, and can be reset when needed. The calibration can also hold your own heart rate zone limits, which Body Energy and the activity detail's heart rate zones then use instead of the ones worked out from your maximum heart rate. Up to 2.16.0 the calibration could also fit itself to a Garmin watch's own body energy reading; that went with the watches to [OpenWatch](../../openwatch/index.md).
 
-Recovery settings also carry a Start over card for the three metrics OpenVitals works out itself and keeps outside Health Connect: Body Energy, Recovery and Expenditure. Behind a confirmation it wipes their history, the tuning learned from the watch, the baselines and the expenditure cache, then rebuilds them from Health Connect as a fresh install would. Health Connect data, the body profile, heart zones and goals are kept.
+Recovery settings also carry a Start over card for the three metrics OpenVitals works out itself and keeps outside Health Connect: Body Energy, Recovery and Expenditure. Behind a confirmation it wipes their history, the tuning learned so far, the baselines and the expenditure cache, then rebuilds them from Health Connect as a fresh install would. Health Connect data, the body profile, heart zones and goals are kept.
 
 ## How The Battery Moves
 
@@ -37,6 +37,31 @@ breathing rate.
 **It drains** from basal metabolism — a gentle downward slope whenever nothing
 else is happening — from active energy burned, from heart-rate-derived stress,
 and from recovery debt after a hard session.
+
+Where a stretch of the day has steps but no active calories from any source, its
+walking cost stands in, from the cadence (Moore et al. 2021) and the weight in
+your [body profile](settings-and-preferences.md). Without a weight nothing
+stands in, and the detail view says which body profile fields are missing, with a
+button to open the profile. Up to 2.16.0 every such step counted a flat 0.04 kcal.
+
+## Heart Rate Zones
+
+The heart rate parts of the balance place each reading in a zone on the heart
+rate reserve, the span between your resting and maximum heart rate, on the ACSM's
+intensity classes (Garber et al. 2011): light from 30 %, moderate from 40 %,
+vigorous from 60 % and near-maximal from 90 %. A fifth bound at 75 % splits
+vigorous in two so the zones stay five; it has no source of its own. Minutes from
+the moderate zone up count as active, and from vigorous up as building recovery
+debt. Since 2.17.0 moderate starts at 40 %, as the ACSM has it;
+it was 45 %, so a little more time now counts as active.
+
+The maximum heart rate is the one every OpenVitals estimate uses: the one you
+entered in the body profile, else the highest reading of the year before when it
+is believable against your resting rate, else an age estimate (Gulati for women,
+Tanaka otherwise). Up to 2.16.0 Body Energy ignored an entered maximum and looked
+for the highest reading in its own 28-day window. An entered resting rate is
+still not used here. Limits you set yourself in the calibration replace these
+zones.
 
 Calibration nudges how strongly each of those counts for you; the shape above is
 the same for everyone.

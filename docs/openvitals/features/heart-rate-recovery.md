@@ -66,11 +66,16 @@ Judging whether effort was near-maximal needs a maximum heart rate. OpenVitals
 resolves one in this order:
 
 1. The maximum you entered in [Body profile](settings-and-preferences.md).
-2. The highest rate actually observed, when it is plausible against your resting
-   rate.
+2. The highest rate observed in the year before, when it is plausible against
+   your resting rate. Up to 2.16.0 this screen looked at 90 days of daily
+   summaries, and the activity detail's recovery card at none.
 3. An age estimate: Gulati (206 − 0.88 × age) when the body profile says female,
    otherwise Tanaka (208 − 0.7 × age). Both are more accurate across ages than
    the older 220 − age rule.
+
+Since 2.17.0 every OpenVitals estimate that needs a maximum heart rate resolves it
+this way: cardio load, intensity minutes, Body Energy, the heart rate zones and the
+workout calorie estimate too, and OpenWatch does the same.
 
 An estimated maximum widens the band that counts as near-maximal, because the
 estimate itself is uncertain. If none of the three can be resolved, the reading

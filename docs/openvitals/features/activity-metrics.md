@@ -30,6 +30,29 @@ Some apps save a GPS route but a distance estimated from steps, which can be hal
 
 Routes written by other apps are readable only with the Exercise routes permission, which you grant in Health Connect's own settings.
 
+## Heart Rate Zones
+
+Since 2.17.0 the activity detail shows how long a workout spent in each of five heart rate zones, on the ACSM's intensity classes (Garber et al. 2011, table 4): very light, light, moderate, vigorous and near-maximal.
+
+- With a resting heart rate in the [body profile](settings-and-preferences.md), the zones are shares of the heart rate reserve, the span from resting to maximum: light from 30 %, moderate from 40 %, vigorous from 60 %, near-maximal from 90 %.
+- Without one, they are shares of the maximum heart rate: light from 57 %, moderate from 64 %, vigorous from 77 %, near-maximal from 96 %.
+- The maximum is the one you entered, else the highest reading of the year up to the workout when it is believable against the day's resting rate, else an age estimate (Gulati for women, Tanaka otherwise).
+- Limits you set yourself in the [Body Energy](body-energy.md) calibration win over all of this.
+
+The card names its basis: the maximum it used, or your own limits. A reading counts until the next one only when the two are at most five minutes apart, the same limit cardio load, intensity minutes and the calorie estimate use; the last reading counts for no time. OpenWatch places zones by the same rules, so one heart rate lands in the same zone in both apps.
+
+## Calorie Estimates
+
+A workout that measured no calories gets an estimate when it is entered by hand, recorded, or imported from a FIT or route file or in bulk. Since 2.17.0 it is worked out in this order:
+
+1. **From the heart rate**, by Keytel et al. 2005, while the workout's mean heart rate lies between 57 and 90 % of your maximum and the body profile has a birth year. Each reading is weighted by the time it covers, and a gap over five minutes counts for nothing.
+2. **From the distance**, for a walk or run at a pace ACSM's metabolic equations cover (walking at 50 to 100 m/min, running above 134 m/min): about 0.49 and 0.98 kcal per kg per km.
+3. **From the activity's MET** in the 2024 Adult Compendium (Herrmann et al. 2024). An activity the Compendium does not cover gets no estimate.
+
+The resting share for the same time is taken off: your Mifflin-St Jeor rate when the body profile has weight, height and birth year, else 1 MET. Without a sex in the profile, Keytel and Mifflin-St Jeor take the mean of the men's and women's equations.
+
+Every estimate needs a weight in the body profile. Up to 2.16.0 a missing weight was taken as 70 kg; now there is no estimate, and the activity entry form names the body profile fields it misses. The maximum heart rate is the one every OpenVitals estimate uses: the one you entered, else the highest reading of the year before, else the age estimate. OpenWatch uses the same calculation for the workouts it writes, so the two apps give the same number for the same workout.
+
 ## Detail Pattern
 
 Activity metric screens follow the shared period-detail model:

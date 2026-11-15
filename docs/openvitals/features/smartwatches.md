@@ -22,4 +22,6 @@ OpenVitals and OpenWatch talk on the phone through [OpenLink](../../openlink/ind
 - **Body profile.** Birth year, sex, height and weight are kept the same in both apps, the newest change winning. The body profile screen says **Kept in sync with OpenWatch** while it is.
 - **Live heart rate while recording.** While an activity records, OpenVitals asks OpenWatch to keep the watch streaming and uses its live heart rate as the recording's heart rate sensor. A Bluetooth LE strap you added still wins. OpenWatch shows a notification while it streams.
 
+OpenVitals connects only to an OpenWatch signed by the project's key. An app installed under OpenWatch's name with another key is sent nothing: Settings, OpenWatch says it was not signed by the OpenWatch project and shows its signing key, and connects only after **Connect anyway**, a choice that holds for that key. Connect anyway only if you built or installed it yourself.
+
 A watch that broadcasts its heart rate over Bluetooth LE can also be added as a [sensor](ble-sensors.md), without OpenWatch.

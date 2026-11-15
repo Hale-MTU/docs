@@ -9,7 +9,7 @@
 Research date: 2026-07-02
 
 This note covers the beverage presets imported from `CaffeineHealthDrinkCatalog`
-plus the OpenVitals water seed. The app currently exposes 215 preloaded beverage
+and `CoffeeRecipeDrinkCatalog` plus the OpenVitals water seed. The app currently exposes 215 preloaded beverage
 presets with ordinary drink serving sizes: 1 water drink, 83 coffee drinks,
 91 energy drinks, 16 tea drinks, 21 carbonated soft drinks, and 3 chocolate drinks.
 
@@ -49,6 +49,19 @@ multiple branded items in that family.
 | Energy shots and concentrated energy | 5 Hour Energy Extra Strength, Eternal Energy | 57-59 ml | 0-4 | 0 | 0 | 0 | 0 | 0 | 0 | 0-15 | -- | -- | 190-230 | Very high caffeine density; nutrition label may be Supplement Facts rather than Nutrition Facts. Sources: https://5hourenergy.com/blogs/the-feed/5-hour-energy-caffeine-facts and https://www.amazon.com/5-Hour-Energy-Strength-Dietary-Supplement/dp/B007W86RUA |
 | Juice, tea, or vegetable energy drink | V8+ Energy, Celsius tea flavors, Monster Juice/Rehab | 237-473 ml | 50-230 | 0 | 0 | 10-56 | 10-50 | 0-1 | 0-1 | 40-240 | -- | -- | 80-200 | These add fruit/vegetable juice or tea bases, so sugar and calories vary more than zero-sugar energy drinks. V8 Energy lists 80 mg caffeine and fruit/vegetable juice content. Source: https://www.campbells.com/v8/products/v8-energy/peach-mango/ |
 | Pre-workout or caffeinated drink mix | Gorilla Mode Pre-workout, Gamersups, Mio Energy, C4 drink mix | prepared serving | 0-20 | 0 | 0 | 0-5 | 0 | 0 | 0 | 0-40 | -- | -- | 60-350 | Many are dietary supplements, not ordinary beverages; ingredients can include beta-alanine, amino acids, niacin, or other actives. Source example: https://cellucor.com/pages/c4-energy-nutrition-facts |
+
+## Espresso-And-Milk Recipes
+
+Since 2.17.0 four espresso-and-milk drinks are preloaded with a full recipe rather than a family range. Each is one 40 ml espresso shot plus milk, with the volumes of the Nespresso Professional Momento recipe book (milk and milk foam both counted as milk). Caffeine and nutrients are the sum of the espresso, USDA FoodData Central SR Legacy 171891 ("Beverages, coffee, brewed, espresso, restaurant-prepared", 212 mg caffeine per 100 g), and whole milk, SR Legacy 172217 ("Milk, whole, 3.25% milkfat"), so each carries about 85 mg of caffeine.
+
+| Drink | Espresso | Milk | Serving |
+|---|---:|---:|---:|
+| Espresso macchiato | 40 ml | 35 ml | 75 ml |
+| Cortado | 40 ml | 15 ml | 55 ml |
+| Flat white | 40 ml | 110 ml | 150 ml |
+| Latte macchiato | 40 ml | 220 ml | 260 ml |
+
+The same release corrects serving volumes where a source gives the real size, each source kept beside the value in the catalog: cappuccino 160 ml (the INEI brochure: 25 ml espresso and 100 ml milk in a 150-160 ml cup), the Dolce Gusto espresso 40 ml and lungo 120 ml, Nespresso Classic pods 110 ml and the Vertuo pod 230 ml, the cup size its name gives, and a Starbucks espresso shot 75 mg of caffeine in 1 fl oz.
 
 ## Catalog Mapping Implications
 
