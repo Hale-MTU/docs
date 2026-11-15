@@ -1,5 +1,7 @@
 import type { MetaRecord } from 'nextra'
 
 export default {
-  index: 'Overview'
+  index: 'Overview',
+  vertmatch: 'VertMatch',
+  privacy: 'Privacy'
 } satisfies MetaRecord

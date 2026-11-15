@@ -90,7 +90,7 @@ What Health Connect has no record type for (a Garmin's stress, Body Battery, sle
 ## Status
 
 - **Working:** OpenWatch, OpenVitals, Health Connect between them, and OpenLink.
-- **In development:** the sharing interface from OpenVitals to OpenBridge. It is not in an OpenVitals release yet.
-- **Planned:** OpenBridge's connections to online services, language models and other apps. None is connected yet.
+- **In development:** the sharing interface from OpenVitals to OpenBridge. It is in OpenVitals' nightly builds and not in a release yet. OpenBridge itself has no release yet either.
+- **Planned:** more of OpenBridge's connections to online services, language models and other apps. The first, [VertMatch](openbridge/vertmatch.md), is built and being tested.
 
 The source of each piece: [OpenVitals](https://github.com/Hale-MTU/OpenVitals), [OpenWatch](https://github.com/Hale-MTU/OpenWatch), [OpenLink](https://github.com/Hale-MTU/OpenLink), [OpenBridge](https://github.com/Hale-MTU/OpenBridge).
