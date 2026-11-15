@@ -11,9 +11,10 @@ What a watch sync writes: `WRITE_STEPS`, `WRITE_DISTANCE`, `WRITE_EXERCISE`,
 `WRITE_EXERCISE_ROUTE`, `WRITE_ELEVATION_GAINED`, `WRITE_ACTIVE_CALORIES_BURNED`,
 `WRITE_TOTAL_CALORIES_BURNED`, `WRITE_HEART_RATE`, `WRITE_RESTING_HEART_RATE`,
 `WRITE_HEART_RATE_VARIABILITY`, `WRITE_BASAL_METABOLIC_RATE`, `WRITE_FLOORS_CLIMBED`,
-`WRITE_WHEELCHAIR_PUSHES`, `WRITE_SPEED`, `WRITE_POWER`, `WRITE_STEPS_CADENCE`,
-`WRITE_CYCLING_PEDALING_CADENCE`, `WRITE_OXYGEN_SATURATION`, `WRITE_RESPIRATORY_RATE`,
-`WRITE_VO2_MAX`, `WRITE_SLEEP`.
+`WRITE_WHEELCHAIR_PUSHES`, `WRITE_SPEED`, `WRITE_POWER`,
+`WRITE_OXYGEN_SATURATION`, `WRITE_RESPIRATORY_RATE`,
+`WRITE_VO2_MAX`, `WRITE_SLEEP`. Steps cadence falls under `WRITE_STEPS` and cycling cadence under `WRITE_EXERCISE`:
+Health Connect has no separate cadence permission.
 
 What a scale weigh-in writes: `WRITE_WEIGHT`, `WRITE_BODY_FAT`, `WRITE_LEAN_BODY_MASS`,
 `WRITE_BODY_WATER_MASS`.
@@ -45,7 +46,12 @@ and `REQUEST_OBSERVE_COMPANION_DEVICE_PRESENCE`: install-time grants with no pro
 own. The user's consent is the system "Allow OpenWatch to access <device>?" dialog. The
 association keeps the app alive while a watch is in range, so a file sync that runs for
 minutes is not killed; for the scale, it is what lets Android wake the app for the two seconds
-a weigh-in is on the air. Declining is supported: the watch is bonded and syncs regardless.
+a weigh-in is on the air. For a Garmin watch, declining is supported: the watch is bonded and
+syncs regardless. A Wear OS watch is added only with the association, because OpenWatch may
+start a foreground service from the background only for an associated device, and a workout
+another app starts on the watch needs one. A Wear OS watch added before this rule, or whose
+association the user removed in Android's settings, shows a "Link watch" button on its device
+screen.
 
 ## Notification Access
 
@@ -62,6 +68,12 @@ behind a per-watch toggle that is off by default.
 
 `FOREGROUND_SERVICE` and `FOREGROUND_SERVICE_CONNECTED_DEVICE`, for the scale's 45-second
 listening service. `WAKE_LOCK` and `POST_NOTIFICATIONS` go with it.
+
+## Overlay Protection
+
+`HIDE_OVERLAY_WINDOWS`, a normal permission with no prompt. While the Connected apps screen
+shows, OpenWatch hides other apps' overlays (API 31 and newer) and drops touches that pass
+through another app's window, so no app can draw over Allow or a capability switch.
 
 ## Removed Network Permissions
 

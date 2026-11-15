@@ -8,8 +8,9 @@ Other apps on the same phone can ask to use OpenWatch through [OpenLink](../open
 
 ## Who may connect
 
-- **OpenVitals** is signed by the same developer and connects without asking, whether it came from Google Play or from GitHub. It still appears on the Connected apps screen, where you can take anything back.
-- **Any other app** waits for you. OpenWatch's home screen shows a card, "*App* wants to connect", and **Review** opens the request: what the app asks for, with **Allow** and **Block**. Until you answer, the app gets nothing.
+- **OpenVitals** connects without asking, whether it came from Google Play or from GitHub, because OpenWatch knows it by its name and its signing key together. It still appears on the Connected apps screen, where you can take anything back.
+- **Any other app** waits for you. It heads the Connected apps list, marked **Asks to connect**, with what it asks for and **Allow** and **Block**; an app can open that screen for you from a tap, as OpenVitals' **Open OpenWatch to approve** does. Until you answer, the app gets nothing. Up to 0.3.0 the home screen also showed a card for such an app; since 0.4.0 it does not, since any app could raise one.
+- **An app that uses OpenVitals' name** but is not signed by the OpenVitals project is treated as any other app, and its card warns that it calls itself OpenVitals without the project's signature. Allow it only if you built or installed it yourself and trust where it came from.
 
 An app whose signing certificate changes, a different app under the same name, starts over and has to ask again.
 
@@ -33,11 +34,13 @@ Open **Settings, Connected apps**. Each app that asked has a card that says:
 - what its recording is doing, such as **Recording: streaming heart rate from Venu 3**, or that it is waiting for the watch's first reading;
 - when its **last profile** arrived.
 
+While the screen shows, a touch that passes through another app's window is dropped and, on Android 12 and newer, other apps' overlays are hidden, so no app can draw over **Allow** or a switch.
+
 Each permission has a switch; turning one off takes effect at once and ends anything running under it. **Block** stops the app entirely. **Forget** removes it: it asks again the next time it connects, except OpenVitals, which is allowed again at once. **Unblock** forgets a blocked app, so it can ask again.
 
 ## Body profile
 
-**Settings, Body profile** holds the birth year, sex, height and weight that the scale's body composition and the walking-energy estimate need. With OpenVitals connected and the profile shared, the screen says **Kept in sync with OpenVitals**, with when it last changed. The newest change wins, on either side: edit it in OpenVitals or in OpenWatch, and the other app takes it the next time they connect.
+**Settings, Body profile** holds the birth year, sex, height and weight that the scale's body composition and the calorie estimates for walking, watch workouts and imported workouts need. Without a weight there is no calorie estimate, and the sync card says so. With OpenVitals connected and the profile shared, the screen says **Kept in sync with OpenVitals**, with when it last changed. The newest change wins, on either side: edit it in OpenVitals or in OpenWatch, and the other app takes it the next time they connect.
 
 A weight or height Health Connect holds is shown beside the field and is used in place of the one typed here.
 

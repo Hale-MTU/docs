@@ -6,7 +6,7 @@ OpenWatch has two parts: the phone app, and on a Wear OS watch the OpenWatch wat
 
 | Channel | Use when |
 | --- | --- |
-| Google Play | You want the normal install and update path. One listing carries the phone app and the Wear OS watch app. Until Google has approved the app, its builds go to Play's testing tracks. |
+| Google Play | You want the normal install and update path. One listing carries the phone app and the Wear OS watch app. A release goes to open testing first, then to production. |
 | GitHub releases | You want the signed APKs: the phone app, a debug build, and the watch app. [Releases](https://github.com/Hale-MTU/OpenWatch/releases) |
 | Nightly | You want the newest build: the [`nightly` prerelease](https://github.com/Hale-MTU/OpenWatch/releases/tag/nightly) on GitHub, rebuilt every night, and Play's testing track. |
 | Source build | You want to build it yourself; see [Development](developers/development.md). |
@@ -26,3 +26,5 @@ From Google Play, the watch app installs from the watch's own Play Store once th
 ## After installing
 
 Open OpenWatch. It walks through Health Connect first: the Health Connect screen lists any permission still missing by name, and says where background and history access are granted. Then pair a watch or add the scale from the home screen.
+
+Since 0.4.0 a Wear OS watch is added only when you allow Android's companion device dialog, which OpenWatch needs for a workout started on the watch. A watch added before, or whose association was removed in Android's settings, shows **Link watch** on its status card. A Garmin watch keeps the association optional.
