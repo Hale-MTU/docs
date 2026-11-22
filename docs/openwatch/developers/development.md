@@ -13,6 +13,15 @@ Gradle wrapper. JDK 17 or 21, the Android platform 37 and build-tools 37.0.0.
 `scripts/ci-android-gradle.sh` wraps `./gradlew` with the JDK and SDK checks the CI image
 needs; it works locally too.
 
+## The JDK
+
+The Gradle daemon runs on JDK 17, pinned in `gradle/gradle-daemon-jvm.properties`: the JDK CI
+and F-Droid build with. Where none is installed, Gradle downloads one (Temurin, through foojay)
+into `~/.gradle/jdks`; `JAVA_HOME` only starts the launcher. It matters for the bytes: the same
+commit built on JDK 21 ships a different `assets/dexopt/baseline.prof` (measured 2026-11-21,
+classes identical), so a local release build matches CI's and F-Droid's only on 17. The
+plugins' classpath is locked in `buildscript-gradle.lockfile`.
+
 ## The Gates
 
 Two gates, as in OpenVitals: the phone gate and the watch gate. Both run the link
@@ -20,7 +29,7 @@ module's tests, since both apps compile it.
 
 ```bash
 ./gradlew verifyCi        # the phone app and the domain module: unit tests, translations, duplicate classes, android-test compile, lint
-./gradlew verifyWearCi    # the watch app: unit tests, lint, build, android-test compile
+./gradlew verifyWearCi    # the watch app: unit tests, lint, build, android-test compile, and :app's architecture tests
 ```
 
 `verifyCi` is three tasks that CI runs as separate jobs: `verifyCiUnitTest`,
@@ -28,16 +37,57 @@ module's tests, since both apps compile it.
 
 The verify workflow (`.github/workflows/verify.yml`) diffs a pull request or push against
 its base and runs the phone jobs for anything outside `wear/` and the watch job for `wear/`,
-`wearlink/` and the shared build files. A change to the root Gradle files runs both.
+`wearlink/` and the shared build files. A change to the root Gradle files, to
+`gradle.properties` or to the health-calculations pointer runs both: the watch app compiles
+that library too.
+
+## Lint
+
+Lint runs on every pull request and push that touches the phone side, and in the watch
+gate. A warning fails it (`warningsAsErrors`, set for every module in `build-logic/`).
+The warnings that were there when that was switched on are in each module's
+`lint-baseline.xml`; fix them from there, and never record a new one into it. A baseline
+entry that was fixed is reported as such and can be dropped by regenerating:
+
+```bash
+./gradlew :app:updateLintBaselineCi :domain:updateLintBaselineCi :wear:updateLintBaselineDebug
+```
+
+Two kinds of check are off on purpose. The version checks (`GradleDependency`,
+`NewerVersionAvailable` and the like) change with the calendar, not the code. The plural and
+spelling checks over translations are informational: Weblate writes those files, and
+`scripts/verify-translations.py` checks what can break at runtime.
 
 ## Dependency Locks
 
-Every module locks its dependencies (`dependencyLocking` in the root build). After a
+Every module locks its dependencies (`dependencyLocking`, in `build-logic/`). After a
 dependency change, regenerate the module's lockfile and commit it:
 
 ```bash
 ./gradlew :app:dependencies :domain:dependencies :wear:dependencies :wearlink:dependencies --write-locks
 ```
+
+## Dependency Verification
+
+`gradle/verification-metadata.xml` holds the SHA-256 of every artifact the build downloads,
+the submodules' and `build-logic/`'s included; a jar or POM that does not match fails the
+build. A lock pins the version, this pins the bytes. After a dependency or plugin change,
+rerun the gates and the release builds with `--write-verification-metadata`, so the tasks
+that resolve their own tools (lint, R8, aapt2) are covered too, and review the diff. Run it
+from an empty Gradle home: a warm cache answers some lookups from what it already holds, and
+the POMs it skipped then fail on a clean CI runner.
+
+```bash
+GRADLE_USER_HOME="$(mktemp -d)" ./gradlew --no-build-cache --write-verification-metadata sha256 \
+  verifyCi verifyWearCi :app:assembleRelease :app:bundleRelease :app:assembleNightly \
+  :app:bundleNightly :app:assembleDebug :wear:assembleRelease :wear:bundleRelease \
+  :wear:assembleNightly :wear:bundleNightly
+```
+
+Gradle writes the aapt2 jar of the machine it runs on only. The macOS and Windows jars
+are added by hand from Google's Maven, so a contributor on either can build; when AGP
+moves, hash the new version's `aapt2-<version>-osx.jar` and `-windows.jar` again. Source
+and javadoc jars, which only an IDE sync downloads, are trusted by name.
 
 ## Strings
 

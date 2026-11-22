@@ -293,11 +293,15 @@ Phone notifications can be forwarded to a paired Garmin watch that supports it. 
 3. It then opens Android's notification access screen. Access can only be granted there; OpenWatch cannot request it from inside the app.
 4. Coming back to OpenWatch, the switch turns itself on once access has been granted.
 
-### The App Blocklist
+### Which Apps Send
 
-"Apps to silence" lists the apps installed on the phone. Everything sends to the watch until an app is switched off, so the list is a blocklist rather than an allow-list.
+The list shows the apps installed on the phone. By default every app sends until it is switched off, so the list is a blocklist. "Only apps I choose" turns it into an allow-list: then only the apps switched on send. Each mode keeps its own list, so switching back finds the blocklist as it was.
 
-Some notifications never reach the watch regardless: ongoing and foreground-service notifications, group summaries, notifications an app marks as local to the phone, notifications with neither a title nor a body, minimum-importance channels, anything at all while the phone's own Do Not Disturb is on, and OpenWatch's own notifications.
+"Hide sensitive content", on by default, holds back the content of a channel set in Android's notification settings to hide sensitive content on the lock screen (see below).
+
+Some notifications never reach the watch regardless: ongoing and foreground-service notifications, group summaries, notifications an app marks as local to the phone or as secret, notifications from a channel set not to show on the lock screen, notifications with neither a title nor a body, minimum-importance channels, anything at all while the phone's own Do Not Disturb is on, and OpenWatch's own notifications.
+
+A channel set in Android's notification settings to hide sensitive content on the lock screen sends only its title, or the app's public version where it gives one, and none of its actions: an action's label can carry what was held back. Every other notification arrives whole, locked phone or not; Android's own default for a notification is to show it in full. Android gives apps no mark for a one-time code, so the channel's lock-screen setting is the signal; Android 12 and newer let an app read it, and before that only an app's own secret mark is honoured.
 
 ### Calls
 
@@ -327,7 +331,7 @@ Off by default, because an open stream spends the watch's battery.
 
 ## Weather On The Watch
 
-The watch's weather glance asks the phone for weather, and OpenWatch answers from a weather app on the phone, not from the internet. Any app that broadcasts the Gadgetbridge generic-weather format works; [Breezy Weather](https://github.com/breezy-weather/breezy-weather) is the tested one (enable its Gadgetbridge broadcast and add OpenWatch to its recipients). The snapshot is considered fresh for six hours. Any app on the phone can send this broadcast, so the receiver caps what it reads: 512 KB after unzipping, 16 levels of nesting, 72 hours and 16 days of forecast. A payload past a cap is dropped.
+The watch's weather glance asks the phone for weather, and OpenWatch answers from a weather app on the phone, not from the internet. Any app that broadcasts the Gadgetbridge generic-weather format works; [Breezy Weather](https://github.com/breezy-weather/breezy-weather) is the tested one (enable its Gadgetbridge broadcast and add OpenWatch to its recipients). The snapshot is considered fresh for six hours. Any app on the phone can send this broadcast, so the receiver caps what it reads: 512 KB after unzipping, 16 levels of nesting, 72 hours and 16 days of forecast. A payload past a cap is dropped, and one that comes within a minute of the last kept is too. The sender is not checked: Android names a broadcast's sender only when the sender opts in, and weather apps do not.
 
 The location the watch shows is the weather app's location. OpenWatch also answers the watch's own position asks from the phone's last known location, which is what arms the glance in the first place.
 

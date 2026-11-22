@@ -11,6 +11,7 @@ Other apps on the same phone can ask to use OpenWatch through [OpenLink](../open
 - **OpenVitals** connects without asking, whether it came from Google Play or from GitHub, because OpenWatch knows it by its name and its signing key together. It still appears on the Connected apps screen, where you can take anything back.
 - **Any other app** waits for you. It heads the Connected apps list, marked **Asks to connect**, with what it asks for and **Allow** and **Block**; an app can open that screen for you from a tap, as OpenVitals' **Open OpenWatch to approve** does. Until you answer, the app gets nothing. Up to 0.3.0 the home screen also showed a card for such an app; since 0.4.0 it does not, since any app could raise one.
 - **An app that uses OpenVitals' name** but is not signed by the OpenVitals project is treated as any other app, and its card warns that it calls itself OpenVitals without the project's signature. Allow it only if you built or installed it yourself and trust where it came from.
+- **An app that takes another app's name**, one whose package is not that app's, gets a warning on its card too, since 0.4.1.
 
 An app whose signing certificate changes, a different app under the same name, starts over and has to ask again.
 
@@ -30,6 +31,7 @@ Notifications, calendar events, music, saved locations and the scale's key are n
 Open **Settings, Connected apps**. Each app that asked has a card that says:
 
 - whether it is **connected**, **asks to connect**, or is **blocked**;
+- the app's package name and the key it is signed with, since 0.4.1, so two apps of the same name can be told apart;
 - **In use now** while the app is bound to OpenWatch, otherwise when it was **last connected**;
 - what its recording is doing, such as **Recording: streaming heart rate from Venu 3**, or that it is waiting for the watch's first reading;
 - when its **last profile** arrived.
