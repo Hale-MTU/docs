@@ -13,6 +13,7 @@ export default {
   watches: 'Watches',
   'wear-os-sideload': 'Install The Wear OS App',
   scale: 'Xiaomi S400 Scale',
+  'standard-devices': 'Standard Bluetooth Devices',
   '---app': {
     type: 'separator',
     title: 'App'

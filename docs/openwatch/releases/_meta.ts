@@ -1,6 +1,7 @@
 import type { MetaRecord } from 'nextra'
 
 export default {
+  '0.5.0': 'OpenWatch 0.5.0',
   '0.4.1': 'OpenWatch 0.4.1',
   '0.4.0': 'OpenWatch 0.4.0',
   '0.3.0': 'OpenWatch 0.3.0',

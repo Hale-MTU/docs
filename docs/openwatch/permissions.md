@@ -16,16 +16,36 @@ What a watch sync writes: `WRITE_STEPS`, `WRITE_DISTANCE`, `WRITE_EXERCISE`,
 `WRITE_VO2_MAX`, `WRITE_SLEEP`. Steps cadence falls under `WRITE_STEPS` and cycling cadence under `WRITE_EXERCISE`:
 Health Connect has no separate cadence permission.
 
-Three of these are written only for a watch that measures them and only when the user
-switched the option on: `WRITE_RESPIRATORY_RATE` from a Wear OS watch (the "Breathing rate from
-the watch" switch in Settings), and `WRITE_OXYGEN_SATURATION` and `WRITE_SKIN_TEMPERATURE` from a Samsung
+Three of these are written only for a watch that measures them and only while their option is
+on: `WRITE_RESPIRATORY_RATE` from a Wear OS watch (the "Breathing rate from the watch" switch in
+Settings, on by default), and `WRITE_OXYGEN_SATURATION` and `WRITE_SKIN_TEMPERATURE` from a Samsung
 watch (the "SpO2 hourly at night" and "Skin temperature at night" switches on the watch's
-settings card).
+settings card, off until the user switches them on).
 Skin temperature is one record per night, the difference from the wearer's own usual night.
 A Garmin watch's oxygen saturation and respiratory rate come with its files.
 
+What the entries made on a Wear OS watch write, each when the phone pulls it: `WRITE_HYDRATION`,
+`WRITE_WEIGHT`, `WRITE_BLOOD_PRESSURE`, `WRITE_BODY_FAT`, `WRITE_OXYGEN_SATURATION`,
+`WRITE_RESPIRATORY_RATE`, `WRITE_BODY_TEMPERATURE`, `WRITE_BLOOD_GLUCOSE` and `WRITE_HEIGHT` (a value logged in
+the watch's quick log: a hand-logged blood oxygen or breathing rate is written whatever the night
+switches say), `WRITE_MINDFULNESS` (a breathing session, only where Health Connect
+stores mindfulness sessions), and `WRITE_HEART_RATE`, `WRITE_HEART_RATE_VARIABILITY` and, on a
+Samsung watch, `WRITE_OXYGEN_SATURATION` (a spot measurement). An entry whose write is not granted
+waits on the watch, and the watch's card asks for the grant; the entries whose write is granted go on.
+
+A workout recorded on a Wear OS watch also writes `WRITE_VO2_MAX`: an estimate for a walk or run
+with a route, from the heart rate the watch recorded and the body profile's resting heart rate,
+left out without the grant while the session is written.
+
 What a scale weigh-in writes: `WRITE_WEIGHT`, `WRITE_BODY_FAT`, `WRITE_LEAN_BODY_MASS`,
 `WRITE_BODY_WATER_MASS`.
+
+What a heart rate strap on Bluetooth's standard Heart Rate profile writes: `WRITE_HEART_RATE`, one
+record per minute of what it streamed while its screen was open or an app you allowed recorded
+with it. What a device on the standard Blood Pressure, Glucose or Weight Scale profile hands over
+when it wakes: `WRITE_BLOOD_PRESSURE` (with the pulse as `WRITE_HEART_RATE`),
+`WRITE_BLOOD_GLUCOSE` and `WRITE_WEIGHT`. What a device of the standard profiles hands over waits on the phone until its grant is
+in, and its device screen asks for it.
 
 A record whose write is not granted stays on the device; the rest of a sync goes on.
 
@@ -38,6 +58,12 @@ composition), `READ_EXERCISE` (a minute inside a workout gets no walking-energy 
 the heart rate zones the watch shows), `READ_HEART_RATE` (the highest heart rate, for those
 zones, and a workout's energy). `READ_HEALTH_DATA_HISTORY`: the latest weight and height are
 often older than the 30 days Health Connect shows without it.
+
+What a Wear OS watch shows of the phone's: after each sync the phone hands it the last week's
+nights (`READ_SLEEP`), resting heart rates (`READ_RESTING_HEART_RATE`), and each day's active
+calories and distance from every app (`READ_ACTIVE_CALORIES_BURNED`, `READ_DISTANCE`). A figure
+whose read is not granted stays off the watch, and a scheduled sync that cannot see other apps'
+data sends none.
 
 `READ_HEALTH_DATA_IN_BACKGROUND`: a scheduled sync with the app closed can only see other
 apps' weights, workouts and sleep with this grant. Without it the sync still writes the
@@ -90,9 +116,18 @@ it fails `HealthPermissionsTest`.
 | `WRITE_EXERCISE` | A workout you record on the watch, with its route and distance. |
 | `WRITE_EXERCISE_ROUTE` |  |
 | `WRITE_DISTANCE` |  |
-| `WRITE_RESPIRATORY_RATE` | Only with “Breathing rate from the watch” switched on in Settings. |
-| `WRITE_OXYGEN_SATURATION` | Only from a Samsung watch, with “SpO2 hourly at night” switched on for that watch. |
+| `WRITE_RESPIRATORY_RATE` | At night only with “Breathing rate from the watch” switched on in Settings; and a breathing rate you log on the watch. |
+| `WRITE_OXYGEN_SATURATION` | At night only from a Samsung watch, with “SpO2 hourly at night” switched on for that watch; and a blood oxygen you log or measure on the watch. |
 | `WRITE_SKIN_TEMPERATURE` | Only from a Samsung watch, with “Skin temperature at night” switched on for that watch. One record per night: the difference from your own usual night. |
+| `WRITE_HYDRATION` | What you log on the watch, by hand. |
+| `WRITE_WEIGHT` | What you log on the watch, by hand. |
+| `WRITE_BLOOD_PRESSURE` | What you log on the watch, by hand. |
+| `WRITE_MINDFULNESS` | A breathing session you do on the watch, where Health Connect keeps them. |
+| `WRITE_BODY_FAT` | What you log on the watch, by hand. |
+| `WRITE_BODY_TEMPERATURE` | What you log on the watch, by hand. |
+| `WRITE_BLOOD_GLUCOSE` | What you log on the watch, by hand. |
+| `WRITE_HEIGHT` | What you log on the watch, by hand. |
+| `WRITE_VO2_MAX` | An estimate from a walk or run you record on the watch with its route, when your body profile holds a resting heart rate. |
 
 **Written from the scale**
 
@@ -104,6 +139,15 @@ it fails `HealthPermissionsTest`.
 | `WRITE_LEAN_BODY_MASS` | Estimated on the phone from the scale's measurement and your body profile. |
 | `WRITE_BODY_WATER_MASS` | Estimated on the phone from the scale's measurement and your body profile. |
 
+**Written from a device on a standard Bluetooth profile**
+
+| Permission | When, or what for |
+| --- | --- |
+| `WRITE_HEART_RATE` | From a heart rate strap, while its screen is open or an app you allowed records with it: one record per minute. |
+| `WRITE_BLOOD_PRESSURE` | From a blood pressure monitor, each reading it hands over when it wakes, with the pulse it measured written as a heart rate. |
+| `WRITE_BLOOD_GLUCOSE` | From a glucose meter, the readings it stored, handed over when it wakes. A check with control solution is not written. |
+| `WRITE_WEIGHT` | From a scale on the standard Weight Scale profile, each weigh-in it hands over when it wakes. |
+
 **Read from Health Connect**
 
 | Permission | When, or what for |
@@ -114,6 +158,8 @@ it fails `HealthPermissionsTest`.
 | `READ_SLEEP` | So a night that already holds a sleep session is left alone. |
 | `READ_RESTING_HEART_RATE` | So a day that already holds a resting heart rate is left alone, and for the heart rate zones the watch shows. |
 | `READ_HEART_RATE` | Your highest heart rate, for those zones, and a workout's energy. |
+| `READ_ACTIVE_CALORIES_BURNED` | The day's total from every app, which the Wear OS watch shows. |
+| `READ_DISTANCE` | The day's total from every app, which the Wear OS watch shows. |
 | `READ_HEALTH_DATA_HISTORY` | Your latest weight and height are often older than the 30 days Health Connect shows without it. |
 | `READ_HEALTH_DATA_IN_BACKGROUND` | A sync that runs on a schedule, with the app closed, can only see another app's weights and workouts with it. |
 
@@ -124,7 +170,7 @@ it fails `HealthPermissionsTest`.
 | `READ_HEART_RATE` | The watch's heart rate sensor: heart rate, the night's heart rate variability and the sleep estimate. |
 | `READ_HEALTH_DATA_IN_BACKGROUND` | To keep recording with the watch's screen off. |
 | `READ_SKIN_TEMPERATURE` | Only on a Samsung watch, and only when you switch on skin temperature at night. |
-| `READ_OXYGEN_SATURATION` | Only on a Samsung watch, and only when you switch on SpO2 at night. |
+| `READ_OXYGEN_SATURATION` | Only on a Samsung watch: when you switch on SpO2 at night, and when you measure your blood oxygen on the watch. |
 
 <!-- health-data:end -->
 
@@ -139,7 +185,8 @@ asked on the wrist:
 - `ACTIVITY_RECOGNITION`: the step counter.
 - `android.permission.health.READ_SKIN_TEMPERATURE` and `READ_OXYGEN_SATURATION`: asked only
   when the user switches on "Skin temperature at night" or "SpO2 hourly at night" on a watch that has the
-  Samsung Health Platform, which checks them per tracker.
+  Samsung Health Platform, which checks them per tracker, and `READ_OXYGEN_SATURATION` when the
+  user starts a blood oxygen spot measurement there.
 - `ACCESS_FINE_LOCATION`, `ACCESS_COARSE_LOCATION` and `FOREGROUND_SERVICE_LOCATION`: a
   workout recorded with GPS on the watch, and only while it runs.
 - `BLUETOOTH_CONNECT`, `FOREGROUND_SERVICE`, `FOREGROUND_SERVICE_CONNECTED_DEVICE`,
@@ -161,7 +208,9 @@ and `REQUEST_OBSERVE_COMPANION_DEVICE_PRESENCE`: install-time grants with no pro
 own. The user's consent is the system "Allow OpenWatch to access <device>?" dialog. The
 association keeps the app alive while a watch is in range, so a file sync that runs for
 minutes is not killed; for the scale, it is what lets Android wake the app for the two seconds
-a weigh-in is on the air. For a Garmin watch, declining is supported: the watch is bonded and
+a weigh-in is on the air, and for a blood pressure monitor, a glucose meter or a standard
+scale, it is how Android tells the app the device woke with a reading, so such a device is added
+only with it. For a Garmin watch, declining is supported: the watch is bonded and
 syncs regardless. A Wear OS watch is added only with the association, because Android lets an
 app start a foreground service from the background only for an associated device. OpenWatch
 starts none for a watch today; the association keeps that open for a workout another app starts
