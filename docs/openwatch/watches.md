@@ -2,7 +2,7 @@
 
 > **Status:** Current implemented behavior. Experimental.
 > **Audience:** Users and contributors.
-> **Related:** [Permissions](permissions.md), [Install the watch app on a Wear OS watch](wear-os-sideload.md).
+> **Related:** [Supported devices](https://github.com/Hale-MTU/OpenWatch/blob/main/docs/features/devices.md), [Permissions](permissions.md), [Install the watch app on a Wear OS watch](wear-os-sideload.md).
 
 OpenWatch writes what a watch records to Health Connect and shows no history of its own; OpenVitals, or any other Health Connect app, is where the records are read.
 
@@ -415,9 +415,17 @@ A new manoeuvre or street reaches the watch at once. A countdown that merely tic
 
 "Calendar on watch", on the watch's device screen, feeds the watch's calendar glance from the phone's calendar. Off by default; switching it on asks for Android's calendar permission.
 
-The watch asks for a window of events and names its own limits (how many events, how long each field may be), and the phone answers within them. Recurring events arrive as their occurrences, declined and cancelled meetings stay off the wrist, and all-day events land on the wearer's midnight. Events go to the watch over Bluetooth and nowhere else; they are never stored and there is no network to send them over.
+The watch asks for a window of events and names its own limits (how many events, how long each field may be), and the phone answers within them, cutting a long title between characters, never through one. The text goes as UTF-8, so a title in Cyrillic or any other script shows as the watch's fonts draw it; up to 0.5.0 it went as Latin-1, where such a title showed as question marks. Recurring events arrive as their occurrences, declined and cancelled meetings stay off the wrist, and all-day events land on the wearer's midnight. Events go to the watch over Bluetooth and nowhere else; they are never stored and there is no network to send them over.
 
 If the calendar permission is later revoked in system settings, the row says so, and the watch's asks are answered with an empty calendar rather than ignored.
+
+## Hydration From The Watch
+
+The watch's hydration widget sends each drink to Garmin Connect through the phone. OpenWatch answers in Garmin Connect's place: each drink is written to Health Connect as a hydration record at the time it was logged, entered by hand on a Garmin watch, so OpenVitals shows it beside what is logged on the phone. The widget's day total is what the phone has from that watch, and the containers and unit the widget sends are kept and given back when it asks for them; before it has sent any, it gets three containers of 250, 500 and 750 ml. The goal it shows is the daily water goal the connected apps share over OpenLink, set in OpenVitals or on a Wear OS watch's card, and Garmin's default of 2 litres while there is none. It comes with every day total the widget asks for; the widget cannot set it.
+
+A subtraction on the widget takes back the day's newest drinks before it, newest first, and their records are rewritten with what is left, so Health Connect's day agrees with the widget's. A drink that comes while the hydration access is off waits on the phone; the next sync tries it again and names the missing access, and so does the next drink. The phone keeps the last fortnight of each watch's days for the widget's totals.
+
+The widget reaches the phone over an open link, which "Stay connected" holds whenever the watch is in range. It is built from Gadgetbridge's reading of the widget's requests and has not been tried on a watch yet.
 
 ## GPS Ephemeris
 
